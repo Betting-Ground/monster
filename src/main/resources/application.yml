@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: monster-service
+
+  profiles:
+    active: dev
