@@ -1,6 +1,8 @@
 package com.bettingground.monster.domain.entity;
 
+import com.bettingground.monster._common.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import static jakarta.persistence.GenerationType.*;
@@ -20,8 +22,20 @@ public class Monster extends BaseEntity {
     private Long id;
     private String monsterToken;
     private String name;
+    @Min(0)
     private Long hitPoints;
     @Embedded
     private Drop drop;
 
+    @Builder
+    public Monster(String name, Long hitPoints, Drop drop) {
+        this.monsterToken = TokenGenerator.randomCharacterWithPrefix(MONSTER_TOKEN_PREFIX);
+        this.name = name;
+        this.hitPoints = calcHitPoints();
+        this.drop = drop;
+    }
+
+    private Long calcHitPoints() {
+        return 0L;
+    }
 }
